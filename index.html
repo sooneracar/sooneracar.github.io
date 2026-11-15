@@ -3,157 +3,409 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Soner Acar | Tessyn Labs Co. — Mobile Product & Game Studio</title>
+  <title>Tessyn Labs Co. | Soner Acar — Mobile Product & Game Studio</title>
   <style>
     :root {
-      --bg: #0b0f19;
-      --card: #111827;
+      --bg: #090d16;
+      --surface: #111827;
+      --surface-hover: #161f33;
       --border: #1f2937;
-      --text: #f3f4f6;
+      --text: #f9fafb;
       --muted: #9ca3af;
       --accent: #3b82f6;
-      --accent-glow: rgba(59, 130, 246, 0.25);
       --green: #10b981;
       --amber: #f59e0b;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background-color: var(--bg);
+      background: var(--bg);
       color: var(--text);
       line-height: 1.6;
-      padding: 0 20px;
+      -webkit-font-smoothing: antialiased;
     }
-    .container { max-width: 980px; margin: 0 auto; }
-    header {
-      padding: 80px 0 60px;
+    .container { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+
+    /* Üst Menü */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 0;
       border-bottom: 1px solid var(--border);
     }
-    .badge {
-      display: inline-block;
-      background: rgba(16, 185, 129, 0.12);
+    .brand { font-weight: 800; font-size: 1.15rem; letter-spacing: -0.02em; }
+    .brand span { color: var(--accent); }
+    .nav-links { display: flex; gap: 20px; font-size: 0.9rem; }
+    .nav-links a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+
+    /* Giriş (Hero) */
+    .hero { padding: 64px 0 56px; border-bottom: 1px solid var(--border); }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.25);
       color: var(--green);
-      border: 1px solid rgba(16, 185, 129, 0.3);
       padding: 6px 14px;
       border-radius: 999px;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-weight: 600;
       margin-bottom: 20px;
     }
     h1 {
-      font-size: 2.6rem;
-      line-height: 1.2;
+      font-size: 2.5rem;
+      line-height: 1.18;
+      letter-spacing: -0.03em;
       margin-bottom: 16px;
-      letter-spacing: -0.02em;
+      max-width: 780px;
     }
     h1 span { color: var(--accent); }
-    .subtitle {
-      font-size: 1.15rem;
+    .hero p {
       color: var(--muted);
-      max-width: 720px;
-      margin-bottom: 32px;
+      font-size: 1.1rem;
+      max-width: 660px;
+      margin-bottom: 28px;
     }
-    .btn-group { display: flex; flex-wrap: wrap; gap: 12px; }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; }
     .btn {
-      text-decoration: none;
-      padding: 12px 24px;
+      padding: 12px 22px;
       border-radius: 8px;
       font-weight: 600;
-      font-size: 0.95rem;
-      transition: all 0.2s;
+      font-size: 0.92rem;
+      text-decoration: none;
+      transition: 0.2s;
+      display: inline-block;
     }
-    .btn-primary {
-      background: var(--accent);
-      color: #fff;
-      box-shadow: 0 4px 20px var(--accent-glow);
-    }
-    .btn-primary:hover { background: #2563eb; transform: translateY(-1px); }
-    .btn-secondary {
-      background: var(--card);
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
-    .btn-secondary:hover { border-color: var(--muted); }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: #2563eb; }
+    .btn-ghost { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
+    .btn-ghost:hover { border-color: var(--muted); }
 
-    section { padding: 60px 0; border-bottom: 1px solid var(--border); }
-    h2 { font-size: 1.6rem; margin-bottom: 8px; }
-    .section-desc { color: var(--muted); margin-bottom: 32px; }
-
-    .grid {
+    /* Hızlı Özet Şeridi */
+    .metrics {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      padding: 32px 0;
+      border-bottom: 1px solid var(--border);
     }
-    .card {
-      background: var(--card);
+    .metric-box {
+      background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: border-color 0.2s;
+      padding: 18px 20px;
+      border-radius: 10px;
     }
-    .card:hover { border-color: var(--accent); }
-    .card-header {
+    .metric-box strong { display: block; font-size: 1.25rem; color: var(--text); margin-bottom: 2px; }
+    .metric-box span { font-size: 0.85rem; color: var(--muted); }
+
+    /* Bölümler */
+    section { padding: 60px 0; border-bottom: 1px solid var(--border); }
+    .sec-title { font-size: 1.65rem; margin-bottom: 6px; letter-spacing: -0.02em; }
+    .sec-sub { color: var(--muted); margin-bottom: 36px; font-size: 0.98rem; }
+
+    /* Proje Kartları (Görsel Galeri Odaklı) */
+    .project-list { display: flex; flex-direction: column; gap: 32px; }
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+    }
+    .proj-top {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 12px;
     }
-    .card-tag {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--accent);
+    .proj-cat {
+      font-size: 0.76rem;
       font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 4px;
     }
-    .status-pill {
-      font-size: 0.72rem;
-      padding: 3px 8px;
-      border-radius: 6px;
+    .proj-top h3 { font-size: 1.4rem; }
+    .pill {
+      font-size: 0.76rem;
       font-weight: 600;
-      background: rgba(16, 185, 129, 0.15);
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.14);
       color: var(--green);
     }
-    .status-dev {
-      background: rgba(245, 158, 11, 0.15);
-      color: var(--amber);
+    .pill.dev { background: rgba(245, 158, 11, 0.14); color: var(--amber); }
+    .proj-desc { color: var(--muted); font-size: 0.96rem; max-width: 760px; margin-bottom: 20px; }
+
+    /* Yatay Kaydırılabilir Ekran Görüntüsü Galerisi */
+    .gallery {
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      padding-bottom: 12px;
+      margin-bottom: 18px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
     }
-    .card h3 { font-size: 1.25rem; margin-bottom: 10px; }
-    .card p { color: var(--muted); font-size: 0.94rem; margin-bottom: 18px; }
-    .tech-list { display: flex; flex-wrap: wrap; gap: 8px; }
-    .tech {
+    .gallery img {
+      height: 290px;
+      width: auto;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      cursor: zoom-in;
+      transition: transform 0.2s, border-color 0.2s;
+      flex-shrink: 0;
+    }
+    .gallery img:hover { transform: scale(1.02); border-color: var(--accent); }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag {
       background: #1f2937;
       color: #d1d5db;
       font-size: 0.78rem;
       padding: 4px 10px;
       border-radius: 6px;
     }
-    .service-price {
-      margin-top: 16px;
-      padding-top: 12px;
-      border-top: 1px solid var(--border);
-      font-size: 0.9rem;
+
+    /* Hizmetler */
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .service-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .service-card h3 { font-size: 1.15rem; margin-bottom: 10px; }
+    .service-card p { color: var(--muted); font-size: 0.92rem; margin-bottom: 18px; }
+    .service-foot {
+      font-size: 0.85rem;
       color: var(--green);
       font-weight: 600;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
     }
-    footer {
-      padding: 40px 0;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.9rem;
+
+    /* Tam Ekran Görsel Görüntüleyici (Lightbox) */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      cursor: zoom-out;
     }
-    @media (max-width: 600px) {
-      h1 { font-size: 2rem; }
-      header { padding: 50px 0 40px; }
+    #lightbox img { max-width: 95%; max-height: 92vh; border-radius: 10px; }
+
+    footer { padding: 40px 0; text-align: center; color: var(--muted); font-size: 0.88rem; }
+    @media (max-width: 640px) {
+      h1 { font-size: 1.9rem; }
+      .gallery img { height: 240px; }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <header>
-      <div class="badge">● Tessyn Labs Co. — Mobile Product & Game Studio</div>
-      <h1>Soner Acar — <span>Mobile Product Builder</span> & Android Release Specialist</h1>
-      <p class="subtitle">
-        <strong>Tessyn Labs Co.</strong> çatısı altında fikirleri yapay zeka destekli modern geliştirme iş akışlarıyla günler içinde çalışan Android uygulamalarına ve
+    <nav>
+      <div class="brand">Tessyn Labs <span>Co.</span></div>
+      <div class="nav-links">
+        <a href="#projeler">Projeler</a>
+        <a href="#hizmetler">Hizmetler</a>
+        <a href="mailto:tessynlabs@gmail.com">İletişim</a>
+      </div>
+    </nav>
+
+    <div class="hero">
+      <div class="status-badge">● Yeni Projeler & Google Play Yayın Desteği İçin Müsait</div>
+      <h1>Soner Acar — Fikirden Mağazaya <span>Mobil Ürün & Oyun</span> Geliştiricisi</h1>
+      <p>
+        <strong>Tessyn Labs Co.</strong> çatısı altında modern AI iş akışları ve bulut otomasyonuyla günler içinde çalışan Android uygulamaları ve oyunları geliştiriyor; Google Play Console 14 günlük kapalı test süreçlerini anahtar teslim yönetiyorum.
+      </p>
+      <div class="cta-row">
+        <a href="mailto:tessynlabs@gmail.com" class="btn btn-primary">E-posta Gönder (tessynlabs@gmail.com)</a>
+        <a href="https://github.com/sooneracar" target="_blank" class="btn btn-ghost">GitHub: @sooneracar</a>
+      </div>
+    </div>
+
+    <div class="metrics">
+      <div class="metric-box">
+        <strong>4+ Aktif Ürün</strong>
+        <span>Oyun, Sinema & Denizcilik</span>
+      </div>
+      <div class="metric-box">
+        <strong>Otomatik CI/CD</strong>
+        <span>GitHub Actions İmzalı AAB/APK</span>
+      </div>
+      <div class="metric-box">
+        <strong>Play Store Onay</strong>
+        <span>12+ Tester / 14 Gün Süreç Yönetimi</span>
+      </div>
+    </div>
+
+    <section id="projeler">
+      <h2 class="sec-title">Geliştirilen Uygulamalar & Oyunlar</h2>
+      <p class="sec-sub">Ekran görüntülerinin üzerine dokunarak tam boyutta inceleyebilirsiniz.</p>
+
+      <div class="project-list">
+        <!-- Proje 1: Petrol Gezegenleri -->
+        <div class="project-card">
+          <div class="proj-top">
+            <div>
+              <span class="proj-cat">Mobil Oyun • Ekonomi & Simülasyon</span>
+              <h3>Petrol Gezegenleri (Oil Planets)</h3>
+            </div>
+            <span class="pill">Play Store Erken Erişim</span>
+          </div>
+          <p class="proj-desc">
+            8 farklı gezegende keşif, sondaj ve gerçek petrol fiyatlarına endeksli dinamik ticaret mekanikleri sunan simülasyon oyunu. Çevrimdışı kazanç ve AdMob gelir modeliyle Google Play erken erişim sürecinde.
+          </p>
+          <div class="gallery">
+            <img src="petrol1.jpg" alt="Petrol Gezegenleri Ekran 1" onclick="openImg(this.src)" />
+            <img src="petrol2.jpg" alt="Petrol Gezegenleri Ekran 2" onclick="openImg(this.src)" />
+            <img src="petrol3.jpg" alt="Petrol Gezegenleri Ekran 3" onclick="openImg(this.src)" />
+            <img src="petrol4.jpg" alt="Petrol Gezegenleri Ekran 4" onclick="openImg(this.src)" />
+          </div>
+          <div class="tags">
+            <span class="tag">Google Play Erken Erişim</span>
+            <span class="tag">Game Economy</span>
+            <span class="tag">AdMob</span>
+            <span class="tag">Tessyn Labs Co.</span>
+          </div>
+        </div>
+
+        <!-- Proje 2: CineHUD -->
+        <div class="project-card">
+          <div class="proj-top">
+            <div>
+              <span class="proj-cat">Sinema & Prodüksiyon Aracı</span>
+              <h3>CineHUD — Director's Viewfinder</h3>
+            </div>
+            <span class="pill">Play Store Kapalı Test</span>
+          </div>
+          <p class="proj-desc">
+            Görüntü yönetmenleri ve set ekipleri için geliştirilen; canlı kamera vizörü, False Color / Zebra pozlama analizi, güneş açısı takibi, 2D ışık yerleşim planı ve PDF shotlist çıktısı üreten profesyonel prodüksiyon uygulaması.
+          </p>
+          <div class="gallery">
+            <img src="cinehud1.jpg" alt="CineHUD Ekran 1" onclick="openImg(this.src)" />
+            <img src="cinehud2.jpg" alt="CineHUD Ekran 2" onclick="openImg(this.src)" />
+            <img src="cinehud3.jpg" alt="CineHUD Ekran 3" onclick="openImg(this.src)" />
+          </div>
+          <div class="tags">
+            <span class="tag">Capacitor</span>
+            <span class="tag">HTML5 Canvas</span>
+            <span class="tag">GitHub Actions CI/CD</span>
+            <span class="tag">In-App Purchase</span>
+          </div>
+        </div>
+
+        <!-- Proje 3: Marine Anchor Watch -->
+        <div class="project-card">
+          <div class="proj-top">
+            <div>
+              <span class="proj-cat">Denizcilik & GPS Güvenlik</span>
+              <h3>Marine Anchor Watch</h3>
+            </div>
+            <span class="pill">Yayın Hazır</span>
+          </div>
+          <p class="proj-desc">
+            Demirleyen tekneler için gerçek zamanlı GPS Haversine mesafe hesaplaması yapan, tarama (sürüklenme) durumunda sesli alarm üreten ve gece görüşünü koruyan kırmızı ekran moduna sahip güvenlik aracı.
+          </p>
+          <div class="gallery">
+            <img src="anchor.jpg" alt="Marine Anchor Watch Ekranı" onclick="openImg(this.src)" />
+          </div>
+          <div class="tags">
+            <span class="tag">GPS Geolocation</span>
+            <span class="tag">Web Audio API</span>
+            <span class="tag">Target API 36</span>
+            <span class="tag">Signed AAB</span>
+          </div>
+        </div>
+
+        <!-- Proje 4: Pasif Sonar -->
+        <div class="project-card">
+          <div class="proj-top">
+            <div>
+              <span class="proj-cat">Taktiksel Simülasyon Oyunu</span>
+              <h3>Passive Sonar — Tactical Submarine</h3>
+            </div>
+            <span class="pill dev">Geliştirme Aşamasında</span>
+          </div>
+          <p class="proj-desc">
+            Şelale (waterfall) akustik sonar analizi, termal katman derinliği yönetimi, desibel gürültü kontrolü ve gerçek zamanlı hedef vektör takibi sunan denizaltı taktik simülasyonu.
+          </p>
+          <div class="gallery">
+            <img src="sonar1.jpg" alt="Passive Sonar Ekran 1" onclick="openImg(this.src)" />
+            <img src="sonar2.jpg" alt="Passive Sonar Ekran 2" onclick="openImg(this.src)" />
+          </div>
+          <div class="tags">
+            <span class="tag">Acoustic Radar UI</span>
+            <span class="tag">Real-time Simulation</span>
+            <span class="tag">Mobile Game</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="hizmetler">
+      <h2 class="sec-title">Nasıl Yardımcı Olabilirim?</h2>
+      <p class="sec-sub">Bireysel geliştiriciler ve girişimler için hızlı, net ve sonuç odaklı çözümler.</p>
+
+      <div class="service-grid">
+        <div class="service-card">
+          <div>
+            <h3>1. Google Play 12 Tester & Yayınlama</h3>
+            <p>Yeni geliştirici hesapları için zorunlu olan 12+ gerçek test kullanıcısı ve 14 gün kesintisiz test sürecini yönetiyor, politika formlarını tamamlayıp uygulamanızı yayına hazırlıyorum.</p>
+          </div>
+          <div class="service-foot">✓ 14 Gün Aktif Takip & Mağaza Onay Desteği</div>
+        </div>
+
+        <div class="service-card">
+          <div>
+            <h3>2. Web Projesinden İmzalı Android (AAB)</h3>
+            <p>Hazır web uygulamanızı veya yapay zeka ile oluşturduğunuz projeyi Android'e dönüştürüyor, Keystore ile imzalıyor ve GitHub Actions otomatik derleme hattını kuruyorum.</p>
+          </div>
+          <div class="service-foot">✓ Tek Tıkla Bulutta Derleme Altyapısı</div>
+        </div>
+
+        <div class="service-card">
+          <div>
+            <h3>3. Fikirden Çalışan Android MVP</h3>
+            <p>Girişiminiz veya oyun fikriniz için aylarca beklemeden, günler içinde telefonda çalışan ve sunuma hazır ilk sürümü (MVP) ortaya çıkarıyorum.</p>
+          </div>
+          <div class="service-foot">✓ Hızlı Prototipleme & Anahtar Teslim</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2026 Tessyn Labs Co. • Soner Acar — İstanbul • tessynlabs@gmail.com</p>
+    </footer>
+  </div>
+
+  <div id="lightbox" onclick="this.style.display='none'">
+    <img id="lightbox-img" src="" alt="Tam Ekran Görünüm" />
+  </div>
+
+  <script>
+    function openImg(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').style.display = 'flex';
+    }
+  </script>
+</body>
+</html>
